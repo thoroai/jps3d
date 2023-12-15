@@ -1,6 +1,8 @@
 #include <jps_planner/jps_planner/graph_search.h>
 #include <cmath>
 
+#include <iostream>
+
 using namespace JPS;
 
 GraphSearch::GraphSearch(const char* cMap, int xDim, int yDim, double eps, bool verbose) :

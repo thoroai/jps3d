@@ -42,9 +42,12 @@ IF(YAMLCPP_FOUND)
 ELSE()
   MESSAGE(FATAL_ERROR "Could not find yaml-cpp.")
 ENDIF()
+set(YAMLCPP_INCLUDE_DIRS "/usr/include/")
+message("Yaml-cpp OUTPUT: " ${YAMLCPP_INCLUDE_DIRS})
 
 # INCLUDE_DIRECTORIES(include ${EIGEN3_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
-INCLUDE_DIRECTORIES(include ${EIGEN3_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
+# INCLUDE_DIRECTORIES(include ${EIGEN3_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(include ${EIGEN3_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${YAMLCPP_INCLUDE_DIRS})
 
 add_library(jps_lib src/jps_planner/graph_search.cpp
   src/jps_planner/jps_planner.cpp)
