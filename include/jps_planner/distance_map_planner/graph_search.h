@@ -173,7 +173,7 @@ namespace DMP
       double cweight_;
       bool verbose_;
 
-      const int8_t val_free_ = 0;
+      [[maybe_unused]] const int8_t val_free_ = 0;
       const int8_t val_occ_ = 100;
       int xGoal_, yGoal_, zGoal_;
       bool use_2d_;

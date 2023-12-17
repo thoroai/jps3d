@@ -42,8 +42,10 @@ IF(YAMLCPP_FOUND)
 ELSE()
   MESSAGE(FATAL_ERROR "Could not find yaml-cpp.")
 ENDIF()
-set(YAMLCPP_INCLUDE_DIRS "/usr/include/")
+set(YAMLCPP_INCLUDE_DIRS "/home/rvishwanatha/work/thoro/knight/.toolchain/x86_64-linux/2840a1151635c76bcd4b0b532a1f7347af320c9e9aee39adce336e27c1dd1f96/packages/yaml-cpp/c485c8c439c0ec7de411f7a721ae05de94112bd61cb9d7ee4413e9710f89ade1/install/include")
+# set(YAMLCPP_INCLUDE_DIRS "/usr/include/")
 message("Yaml-cpp OUTPUT: " ${YAMLCPP_INCLUDE_DIRS})
+message("Yaml-cpp OUTPUT: " ${YAMLCPP_LIBRARIES})
 
 # INCLUDE_DIRECTORIES(include ${EIGEN3_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 # INCLUDE_DIRECTORIES(include ${EIGEN3_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
@@ -56,22 +58,26 @@ add_library(dmp_lib src/distance_map_planner/graph_search.cpp
   src/distance_map_planner/distance_map_planner.cpp)
 
 add_executable(create_map test/create_map.cpp)
-target_link_libraries(create_map ${YAMLCPP_LIBRARIES})
+# target_link_libraries(create_map ${YAMLCPP_LIBRARIES})
+target_link_libraries(create_map "/home/rvishwanatha/work/thoro/knight/lib/ark/packages/.toolchain/packages/x86_64/yaml-cpp/c485c8c439c0ec7de411f7a721ae05de94112bd61cb9d7ee4413e9710f89ade1/install/lib/libyaml-cpp.a")
 
 include(CTest)
 
 add_executable(test_planner_2d test/test_planner_2d.cpp)
-target_link_libraries(test_planner_2d jps_lib ${YAMLCPP_LIBRARIES} ${Boost_LIBRARIES})
+# target_link_libraries(test_planner_2d jps_lib ${YAMLCPP_LIBRARIES} ${Boost_LIBRARIES})
 # target_link_libraries(test_planner_2d jps_lib ${YAMLCPP_LIBRARIES} Boost::boost)
+target_link_libraries(test_planner_2d jps_lib "/home/rvishwanatha/work/thoro/knight/lib/ark/packages/.toolchain/packages/x86_64/yaml-cpp/c485c8c439c0ec7de411f7a721ae05de94112bd61cb9d7ee4413e9710f89ade1/install/lib/libyaml-cpp.a" ${Boost_LIBRARIES})
 add_test(test_planner_2d test_planner_2d ${CMAKE_SOURCE_DIR}/data/corridor.yaml)
 
 add_executable(test_planner_3d test/test_planner_3d.cpp)
-target_link_libraries(test_planner_3d jps_lib ${YAMLCPP_LIBRARIES})
+# target_link_libraries(test_planner_3d jps_lib ${YAMLCPP_LIBRARIES})
+target_link_libraries(test_planner_3d jps_lib "/home/rvishwanatha/work/thoro/knight/lib/ark/packages/.toolchain/packages/x86_64/yaml-cpp/c485c8c439c0ec7de411f7a721ae05de94112bd61cb9d7ee4413e9710f89ade1/install/lib/libyaml-cpp.a")
 add_test(test_planner_3d test_planner_3d ${CMAKE_SOURCE_DIR}/data/simple3d.yaml)
 
 add_executable(test_distance_map_planner_2d test/test_distance_map_planner_2d.cpp)
-target_link_libraries(test_distance_map_planner_2d jps_lib dmp_lib ${YAMLCPP_LIBRARIES} ${Boost_LIBRARIES})
+# target_link_libraries(test_distance_map_planner_2d jps_lib dmp_lib ${YAMLCPP_LIBRARIES} ${Boost_LIBRARIES})
 # target_link_libraries(test_distance_map_planner_2d jps_lib dmp_lib ${YAMLCPP_LIBRARIES} Boost::boost)
+target_link_libraries(test_distance_map_planner_2d jps_lib dmp_lib "/home/rvishwanatha/work/thoro/knight/lib/ark/packages/.toolchain/packages/x86_64/yaml-cpp/c485c8c439c0ec7de411f7a721ae05de94112bd61cb9d7ee4413e9710f89ade1/install/lib/libyaml-cpp.a" ${Boost_LIBRARIES})
 add_test(test_distance_map_planner_2d test_distance_map_planner_2d ${CMAKE_SOURCE_DIR}/data/corridor.yaml)
 
 
