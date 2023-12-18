@@ -108,11 +108,9 @@ namespace JPS {
         // std::cout << "fToI: " << pt.transpose() << std::endl;
         for(int i = 0; i < Dim; i++)
         {
-          // std::cout << pt(i) << " - " << origin_d_(i) << std::endl;
-          // std::cout << res_ << " - " << 0.5 << std::endl;
+          // std::cout << pt(i) << " - " << origin_d_(i)  << " = " << (pt(i) - origin_d_(i)) << std::endl;
 
-          // pn(i) = std::round((pt(i) - origin_d_(i)) / res_ - 0.5);
-          pn(i) = std::round((pt(i) - origin_d_(i)) / res_);
+          pn(i) = std::round((pt(i) - origin_d_(i)) / res_ - 0.5);
         }
         return pn;
       }
