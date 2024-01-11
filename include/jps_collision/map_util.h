@@ -102,6 +102,20 @@ namespace JPS {
         std::cout << "   dim: [" << dim_.transpose() << "]" << std::endl;
       };
 
+      void print() {
+        std::cout << "MapUtil Print ========================== " << std::endl;
+        int width = getDim()(0);
+        for (int i = 0; i < map_.size(); ++i)
+        {
+          if(i % width == 0)
+            std::cout << std::endl;
+
+          const auto &element = map_[i];
+          std::cout << static_cast<int>(element) << ", ";
+        }
+        std::cout << std::endl;
+      }
+
       ///Float position to discrete cell coordinate
       Veci<Dim> floatToInt(const Vecf<Dim> &pt) {
         Veci<Dim> pn;
