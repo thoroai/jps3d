@@ -13,7 +13,6 @@ set(BUILD_SHARED_LIBS ON)
 FIND_PACKAGE(Boost REQUIRED)
 # FIND_PACKAGE(BOOST REQUIRED)
 FIND_PACKAGE(Eigen3 REQUIRED)
-# FIND_PACKAGE(EIGEN3 REQUIRED)
 FIND_PACKAGE(PkgConfig REQUIRED)
 PKG_CHECK_MODULES(YAMLCPP REQUIRED yaml-cpp)
 
@@ -28,16 +27,16 @@ set(${Boost_INCLUDE_DIRS} "/home/rvishwanatha/work/thoro/knight/.toolchain/x86_6
 message("Boost OUTPUT: " ${Boost_LIBRARIES})
 message("Boost OUTPUT: " ${Boost_INCLUDE_DIRS})
 
-# IF(Eigen3_FOUND)
-IF(EIGEN3_FOUND)
-  MESSAGE(STATUS ">> Found EIGEN3.")
-ELSE()
-  # MESSAGE(FATAL_ERROR ">> Could not find EIGEN3.")
-  MESSAGE(">> Could not find EIGEN3.")
-ENDIF()
-# set(EIGEN3_INCLUDE_DIRS "/usr/include/eigen3")
-# set(EIGEN3_INCLUDE_DIRS "/home/rvishwanatha/work/thoro/knight/.toolchain/x86_64-linux/2840a1151635c76bcd4b0b532a1f7347af320c9e9aee39adce336e27c1dd1f96/packages/eigen/d85d2c4588960ea46507925bd7c9273fdf582c602d25dbf1ce9be772d6680914/install/include/eigen3")
-message("Eigen OUTPUT: " ${EIGEN3_INCLUDE_DIRS})
+# # IF(Eigen3_FOUND)
+# IF(EIGEN3_FOUND)
+#   MESSAGE(STATUS ">> Found EIGEN3.")
+# ELSE()
+#   # MESSAGE(FATAL_ERROR ">> Could not find EIGEN3.")
+#   MESSAGE(">> Could not find EIGEN3.")
+# ENDIF()
+# # set(EIGEN3_INCLUDE_DIRS "/usr/include/eigen3")
+# # set(EIGEN3_INCLUDE_DIRS "/home/rvishwanatha/work/thoro/knight/.toolchain/x86_64-linux/2840a1151635c76bcd4b0b532a1f7347af320c9e9aee39adce336e27c1dd1f96/packages/eigen/d85d2c4588960ea46507925bd7c9273fdf582c602d25dbf1ce9be772d6680914/install/include/eigen3")
+# message("Eigen OUTPUT: " ${EIGEN3_INCLUDE_DIRS})
 
 IF(YAMLCPP_FOUND)
   MESSAGE(STATUS "Found yaml-cpp.")
@@ -52,21 +51,16 @@ message("Yaml-cpp OUTPUT: " ${YAMLCPP_LIBRARIES})
 
 # INCLUDE_DIRECTORIES(include ${EIGEN3_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 # INCLUDE_DIRECTORIES(include ${EIGEN3_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
-INCLUDE_DIRECTORIES(include ${EIGEN3_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${YAMLCPP_INCLUDE_DIRS})
+# INCLUDE_DIRECTORIES(include ${EIGEN3_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${YAMLCPP_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(include ${Boost_INCLUDE_DIRS} ${YAMLCPP_INCLUDE_DIRS})
 
 add_library(jps_lib src/jps_planner/graph_search.cpp
-  src/jps_planner/jps_planner.cpp)
-# target_include_directories(
-#   smooth INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-#   $<INSTALL_INTERFACE:include>
-# )
+                    src/jps_planner/jps_planner.cpp)
 target_link_libraries(jps_lib PUBLIC Eigen3::Eigen)
 
 add_library(dmp_lib src/distance_map_planner/graph_search.cpp
-  src/distance_map_planner/distance_map_planner.cpp)
+                    src/distance_map_planner/distance_map_planner.cpp)
 target_link_libraries(dmp_lib PUBLIC Eigen3::Eigen)
-
-
 
 add_executable(create_map test/create_map.cpp)
 # target_link_libraries(create_map ${YAMLCPP_LIBRARIES})
