@@ -172,9 +172,7 @@ bool JPSPlanner<Dim>::plan(const Vecf<Dim> &start, const Vecf<Dim> &goal, decima
   raw_path_.clear();
   status_ = 0;
 
-  std::cout << "start_int" << std::endl;
   const Veci<Dim> start_int = map_util_->floatToInt(start);
-  std::cout << "startI: " << start_int.transpose() << std::endl;
   if (!map_util_->isFree(start_int)) {
     if(planner_verbose_) {
       if (map_util_->isOccupied(start_int))
@@ -192,9 +190,7 @@ bool JPSPlanner<Dim>::plan(const Vecf<Dim> &start, const Vecf<Dim> &goal, decima
     return false;
   }
 
-  std::cout << "goal_int" << std::endl;
   const Veci<Dim> goal_int = map_util_->floatToInt(goal);
-  std::cout << "goalI: " << goal_int.transpose() << std::endl;
   if (!map_util_->isFree(goal_int)) {
     if(planner_verbose_)
       printf(ANSI_COLOR_RED "goal is not free!\n" ANSI_COLOR_RESET);
@@ -250,6 +246,7 @@ bool JPSPlanner<Dim>::plan(const Vecf<Dim> &start, const Vecf<Dim> &goal, decima
   path_ = removeCornerPts(path_);
   std::reverse(std::begin(path_), std::end(path_));
   path_ = removeLinePts(path_);
+
   return true;
 }
 

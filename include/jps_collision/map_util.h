@@ -36,11 +36,7 @@ namespace JPS {
       ///Check if the given cell is outside of the map in i-the dimension
       bool isOutsideXYZ(const Veci<Dim> &n, int i) { return n(i) < 0 || n(i) >= dim_(i); }
       ///Check if the cell is free by index
-      bool isFree(int idx) { 
-        // std::cout << "isFree idx: " << idx << std::endl; 
-        // std::cout << "isFree val: " << map_[idx] << std::endl; 
-        return map_[idx] == val_free; 
-      }
+      bool isFree(int idx) { return map_[idx] == val_free; }
       ///Check if the cell is unknown by index
       bool isUnknown(int idx) { return map_[idx] == val_unknown; }
       ///Check if the cell is occupied by index
@@ -56,10 +52,7 @@ namespace JPS {
       ///Check if the given cell is free by coordinate
       bool isFree(const Veci<Dim> &pn) {
         if (isOutside(pn))
-        {
-          std::cout << "OUTSIDE" << std::endl;
           return false;
-        }
         else
           return isFree(getIndex(pn));
       }
@@ -105,11 +98,9 @@ namespace JPS {
       void print() {
         std::cout << "MapUtil Print ========================== " << std::endl;
         int width = getDim()(0);
-        for (int i = 0; i < map_.size(); ++i)
-        {
+        for (int i = 0; i < map_.size(); ++i) {
           if(i % width == 0)
             std::cout << std::endl;
-
           const auto &element = map_[i];
           std::cout << static_cast<int>(element) << ", ";
         }
@@ -119,13 +110,8 @@ namespace JPS {
       ///Float position to discrete cell coordinate
       Veci<Dim> floatToInt(const Vecf<Dim> &pt) {
         Veci<Dim> pn;
-        // std::cout << "fToI: " << pt.transpose() << std::endl;
         for(int i = 0; i < Dim; i++)
-        {
-          // std::cout << pt(i) << " - " << origin_d_(i)  << " = " << (pt(i) - origin_d_(i)) << std::endl;
-
           pn(i) = std::round((pt(i) - origin_d_(i)) / res_ - 0.5);
-        }
         return pn;
       }
       ///Discrete cell coordinate to float position

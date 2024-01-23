@@ -30,7 +30,7 @@ int main(int argc, char ** argv){
   planner_ptr->updateMap();
 
   Timer time_jps(true);
-  [[maybe_unused]] bool valid_jps = planner_ptr->plan(start, goal, 1, true); // Plan from start to goal using JPS
+  bool valid_jps = planner_ptr->plan(start, goal, 1, true); // Plan from start to goal using JPS
   double dt_jps = time_jps.Elapsed().count();
   printf("JPS Planner takes: %f ms\n", dt_jps);
   printf("JPS Path Distance: %f\n", total_distance3f(planner_ptr->getRawPath()));
@@ -40,7 +40,7 @@ int main(int argc, char ** argv){
     std::cout << it.transpose() << std::endl;
 
   Timer time_astar(true);
-  [[maybe_unused]] bool valid_astar = planner_ptr->plan(start, goal, 1, false); // Plan from start to goal using A*
+  bool valid_astar = planner_ptr->plan(start, goal, 1, false); // Plan from start to goal using A*
   double dt_astar = time_astar.Elapsed().count();
   printf("AStar Planner takes: %f ms\n", dt_astar);
   printf("AStar Path Distance: %f\n", total_distance3f(planner_ptr->getRawPath()));
