@@ -58,16 +58,16 @@ INCLUDE_DIRECTORIES(include/)
 
 add_library(jps_lib src/jps_planner/graph_search.cpp
                     src/jps_planner/jps_planner.cpp)
-target_link_libraries(jps_lib PUBLIC Eigen3::Eigen Boost::boost)
+target_link_libraries(jps_lib PRIVATE Eigen3::Eigen Boost::boost)
 
 add_library(dmp_lib src/distance_map_planner/graph_search.cpp
                     src/distance_map_planner/distance_map_planner.cpp)
-target_link_libraries(dmp_lib PUBLIC Eigen3::Eigen Boost::boost)
+target_link_libraries(dmp_lib PRIVATE Eigen3::Eigen Boost::boost)
 
 add_executable(create_map test/create_map.cpp)
 # target_link_libraries(create_map ${YAMLCPP_LIBRARIES})
 # target_link_libraries(create_map ${YAMLCPP_LIBRARIES})
-target_link_libraries(create_map PUBLIC yaml-cpp)
+target_link_libraries(create_map PRIVATE yaml-cpp)
 
 include(CTest)
 
