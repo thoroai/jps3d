@@ -20,13 +20,13 @@ namespace JPS {
       ///Simple constructor
       MapUtil() {}
       ///Get map data
-      Tmap getMap() { return map_; }
+      Tmap getMap() const { return map_; }
       ///Get resolution
-      decimal_t getRes() { return res_; }
+      decimal_t getRes() const { return res_; }
       ///Get dimensions
-      Veci<Dim> getDim() { return dim_; }
+      Veci<Dim> getDim() const { return dim_; }
       ///Get origin
-      Vecf<Dim> getOrigin() { return origin_d_; }
+      Vecf<Dim> getOrigin() const { return origin_d_; }
       ///Get index of a cell
       int getIndex(const Veci<Dim>& pn) {
           return Dim == 2 ? pn(0) + dim_(0) * pn(1) :
