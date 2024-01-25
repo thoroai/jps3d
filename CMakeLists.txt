@@ -16,11 +16,15 @@ add_library(jps_lib src/jps_planner/graph_search.cpp
                     src/jps_planner/jps_planner.cpp)
 target_link_libraries(jps_lib 
                       PRIVATE Eigen3::Eigen Boost::boost)
+target_include_directories(jps_lib
+                           PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 
 add_library(dmp_lib src/distance_map_planner/graph_search.cpp
                     src/distance_map_planner/distance_map_planner.cpp)
 target_link_libraries(dmp_lib 
                       PRIVATE Eigen3::Eigen Boost::boost)
+target_include_directories(dmp_lib
+                           PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 
 #
 # Needs a target_link_library path to ark's yaml-cpp which it is not picking up though other ark built packages like Boost and Eigen are being picked up. 
