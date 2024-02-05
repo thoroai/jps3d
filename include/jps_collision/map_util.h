@@ -42,20 +42,24 @@ namespace JPS {
       ///Check if the cell is occupied by index
       bool isOccupied(int idx) { return map_[idx] > val_free; }
 
-      ///Check if the cell is outside by coordinate
+      ///Check if the cell is outside by cell coordinate
       bool isOutside(const Veci<Dim> &pn) {
         for(int i = 0; i < Dim; i++)
           if (pn(i) < 0 || pn(i) >= dim_(i))
             return true;
         return false;
       }
-      ///Check if the given cell is free by coordinate
+      ///Check if given cell is outside by position in map
+      bool isOutside(const Vecf<Dim> &pn) { return isOutside(floatToInt(pn)); }
+      ///Check if the given cell is free by cell coordinate
       bool isFree(const Veci<Dim> &pn) {
         if (isOutside(pn))
           return false;
         else
           return isFree(getIndex(pn));
       }
+      ///Check if given cell is free by position in map
+      bool isFree(const Vecf<Dim> &pn) { return isFree(floatToInt(pn)); }
       ///Check if the given cell is occupied by cell coordinate
       bool isOccupied(const Veci<Dim> &pn) {
         if (isOutside(pn))
@@ -64,15 +68,15 @@ namespace JPS {
           return isOccupied(getIndex(pn));
       }
       ///Check if given cell is occupied by position in map
-      bool isOccupied(const Vecf<Dim> &pn) {
-        return isOccupied(floatToInt(pn));
-      }
-      ///Check if the given cell is unknown by coordinate
+      bool isOccupied(const Vecf<Dim> &pn) { return isOccupied(floatToInt(pn)); }
+      ///Check if the given cell is unknown by cell coordinate
       bool isUnknown(const Veci<Dim> &pn) {
         if (isOutside(pn))
           return false;
         return map_[getIndex(pn)] == val_unknown;
       }
+      ///Check if given cell is unknown by position in map
+      bool isUnknown(const Vecf<Dim> &pn) { return isUnknown(floatToInt(pn)); }
 
       /**
        * @brief Set map
