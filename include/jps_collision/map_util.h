@@ -56,12 +56,16 @@ namespace JPS {
         else
           return isFree(getIndex(pn));
       }
-      ///Check if the given cell is occupied by coordinate
+      ///Check if the given cell is occupied by cell coordinate
       bool isOccupied(const Veci<Dim> &pn) {
         if (isOutside(pn))
           return false;
         else
           return isOccupied(getIndex(pn));
+      }
+      ///Check if given cell is occupied by position in map
+      bool isOccupied(const Vecf<Dim> &pn) {
+        return isOccupied(floatToInt(pn));
       }
       ///Check if the given cell is unknown by coordinate
       bool isUnknown(const Veci<Dim> &pn) {
