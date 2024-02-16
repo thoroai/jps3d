@@ -464,7 +464,7 @@ void DMPlanner<Dim>::setMap(const std::shared_ptr<JPS::MapUtil<Dim>> &map_util,
 }
 
 template <int Dim>
-std::vector<uint8_t> DMPlanner<Dim>::getDistanceFieldsMap()
+std::vector<int8_t> DMPlanner<Dim>::getDistanceFieldsMap()
 {
   return cmap_;
 }
