@@ -464,6 +464,12 @@ void DMPlanner<Dim>::setMap(const std::shared_ptr<JPS::MapUtil<Dim>> &map_util,
 }
 
 template <int Dim>
+std::vector<uint8_t> DMPlanner<Dim>::getDistanceFieldsMap()
+{
+  return cmap_;
+}
+
+template <int Dim>
 bool DMPlanner<Dim>::plan(const Vecf<Dim> &start, const Vecf<Dim> &goal, decimal_t eps, decimal_t cweight) {
   if(planner_verbose_){
     std::cout <<"Start: " << start.transpose() << std::endl;
