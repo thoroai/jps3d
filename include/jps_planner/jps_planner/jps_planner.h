@@ -34,9 +34,9 @@ class JPSPlanner
      */
     int status();
     ///Get the modified path
-    vec_Vecf<Dim> getPath();
+    vec_Vecf<Dim> getPath() const;
     ///Get the raw path
-    vec_Vecf<Dim> getRawPath();
+    vec_Vecf<Dim> getRawPath() const;
     ///remove redundant points on the same line
     vec_Vecf<Dim> removeLinePts(const vec_Vecf<Dim> &path);
     ///Remove some corner waypoints
