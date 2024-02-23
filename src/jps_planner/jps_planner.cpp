@@ -16,10 +16,10 @@ template <int Dim>
 int JPSPlanner<Dim>::status() { return status_; }
 
 template <int Dim>
-vec_Vecf<Dim> JPSPlanner<Dim>::getPath() { return path_; }
+vec_Vecf<Dim> JPSPlanner<Dim>::getPath() const { return path_; }
 
 template <int Dim>
-vec_Vecf<Dim> JPSPlanner<Dim>::getRawPath() { return raw_path_; }
+vec_Vecf<Dim> JPSPlanner<Dim>::getRawPath() const { return raw_path_; }
 
 template <int Dim>
 vec_Vecf<Dim> JPSPlanner<Dim>::removeCornerPts(const vec_Vecf<Dim> &path) {
