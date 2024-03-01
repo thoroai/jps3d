@@ -284,8 +284,13 @@ vec_Vecf<Dim> DMPlanner<Dim>::getSearchRegion() {
 }
 
 template <int Dim>
-std::shared_ptr<JPS::MapUtil<Dim>> DMPlanner<Dim>::getMapUtil() {
+std::shared_ptr<JPS::MapUtil<Dim>> DMPlanner<Dim>::getMapUtil() const {
   return map_util_;
+}
+
+template <int Dim>
+std::vector<int8_t> DMPlanner<Dim>::getDistanceFieldMap() const {
+  return cmap_;
 }
 
 template <int Dim>
@@ -461,12 +466,6 @@ void DMPlanner<Dim>::setMap(const std::shared_ptr<JPS::MapUtil<Dim>> &map_util,
 
   cmap_ = distance_map;
   map_util_->setMap(map_util_->getOrigin(), dim, distance_map, map_util_->getRes());
-}
-
-template <int Dim>
-std::vector<int8_t> DMPlanner<Dim>::getDistanceFieldsMap()
-{
-  return cmap_;
 }
 
 template <int Dim>

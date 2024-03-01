@@ -22,6 +22,12 @@ template <int Dim>
 vec_Vecf<Dim> JPSPlanner<Dim>::getRawPath() const { return raw_path_; }
 
 template <int Dim>
+std::shared_ptr<JPS::MapUtil<Dim>> JPSPlanner<Dim>::getMapUtil() const { return map_util_; }
+
+template <int Dim>
+std::vector<char> JPSPlanner<Dim>::getOccupancyMapUtil1D() const { return cmap_; }
+
+template <int Dim>
 vec_Vecf<Dim> JPSPlanner<Dim>::removeCornerPts(const vec_Vecf<Dim> &path) {
   if (path.size() < 2)
     return path;

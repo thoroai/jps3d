@@ -72,7 +72,9 @@ public:
   /// Get the searching region
   vec_Vecf<Dim> getSearchRegion();
   /// Get the internal map util
-  std::shared_ptr<JPS::MapUtil<Dim>> getMapUtil();
+  std::shared_ptr<JPS::MapUtil<Dim>> getMapUtil() const;
+  /// Get the internal 1D distance map field vector
+  std::vector<int8_t> getDistanceFieldMap() const;
 
   /**
    * @brief Generate distance map
@@ -84,8 +86,6 @@ public:
    */
   void setMap(const std::shared_ptr<JPS::MapUtil<Dim>> &map_util,
               const Vecf<Dim>& pos);
-
-  std::vector<int8_t> getDistanceFieldsMap();
 
   /// Compute the optimal path
   bool computePath(const Vecf<Dim>& start, const Vecf<Dim>& goal, const vec_Vecf<Dim>& path);
