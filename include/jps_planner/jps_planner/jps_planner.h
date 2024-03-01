@@ -37,6 +37,10 @@ class JPSPlanner
     vec_Vecf<Dim> getPath() const;
     ///Get the raw path
     vec_Vecf<Dim> getRawPath() const;
+    /// Get internal map util
+    std::shared_ptr<JPS::MapUtil<Dim>> getMapUtil() const;
+    /// Get internal map util as a binary occupancy 1D vector
+    std::vector<char> getOccupancyMapUtil1D() const;
     ///remove redundant points on the same line
     vec_Vecf<Dim> removeLinePts(const vec_Vecf<Dim> &path);
     ///Remove some corner waypoints
