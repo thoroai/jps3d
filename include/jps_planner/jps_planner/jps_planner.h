@@ -24,7 +24,8 @@ class JPSPlanner
     JPSPlanner(bool verbose = false);
 
     ///Set map util for collistion checking
-    void setMapUtil(const std::shared_ptr<JPS::MapUtil<Dim>>& map_util);
+    // void setMapUtil(const std::shared_ptr<JPS::MapUtil<Dim>>& map_util);
+    void setMapUtil(const std::shared_ptr<const JPS::MapUtil<Dim>>& map_util);
     /**
      * @brief Status of the planner
      *
@@ -38,7 +39,7 @@ class JPSPlanner
     ///Get the raw path
     vec_Vecf<Dim> getRawPath() const;
     /// Get internal map util
-    std::shared_ptr<JPS::MapUtil<Dim>> getMapUtil() const;
+    std::shared_ptr<const JPS::MapUtil<Dim>> getMapUtil() const;
     /// Get internal map util as a binary occupancy 1D vector
     std::vector<char> getOccupancyMapUtil1D() const;
     ///remove redundant points on the same line
@@ -57,7 +58,7 @@ class JPSPlanner
     vec_Vecf<Dim> getAllSet() const;
   protected:
     ///Assume using 3D voxel map for all 2d and 3d planning
-    std::shared_ptr<JPS::MapUtil<Dim>> map_util_;
+    std::shared_ptr<const JPS::MapUtil<Dim>> map_util_;
     ///The planner
     std::shared_ptr<JPS::GraphSearch> graph_search_;
     ///Raw path from planner

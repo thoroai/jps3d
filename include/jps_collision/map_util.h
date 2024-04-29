@@ -28,55 +28,55 @@ namespace JPS {
       ///Get origin
       Vecf<Dim> getOrigin() const { return origin_d_; }
       ///Get index of a cell
-      int getIndex(const Veci<Dim>& pn) {
+      int getIndex(const Veci<Dim>& pn) const {
           return Dim == 2 ? pn(0) + dim_(0) * pn(1) :
                             pn(0) + dim_(0) * pn(1) + dim_(0) * dim_(1) * pn(2);
       }
 
       ///Check if the given cell is outside of the map in i-the dimension
-      bool isOutsideXYZ(const Veci<Dim> &n, int i) { return n(i) < 0 || n(i) >= dim_(i); }
+      bool isOutsideXYZ(const Veci<Dim> &n, int i) const { return n(i) < 0 || n(i) >= dim_(i); }
       ///Check if the cell is free by index
-      bool isFree(int idx) { return map_[idx] == val_free; }
+      bool isFree(int idx) const { return map_[idx] == val_free; }
       ///Check if the cell is unknown by index
-      bool isUnknown(int idx) { return map_[idx] == val_unknown; }
+      bool isUnknown(int idx) const { return map_[idx] == val_unknown; }
       ///Check if the cell is occupied by index
-      bool isOccupied(int idx) { return map_[idx] > val_free; }
+      bool isOccupied(int idx) const { return map_[idx] > val_free; }
 
       ///Check if the cell is outside by cell coordinate
-      bool isOutside(const Veci<Dim> &pn) {
+      bool isOutside(const Veci<Dim> &pn) const {
         for(int i = 0; i < Dim; i++)
           if (pn(i) < 0 || pn(i) >= dim_(i))
             return true;
         return false;
       }
       ///Check if given cell is outside by position in map
-      bool isOutside(const Vecf<Dim> &pn) { return isOutside(floatToInt(pn)); }
+      bool isOutside(const Vecf<Dim> &pn) const { return isOutside(floatToInt(pn)); }
       ///Check if the given cell is free by cell coordinate
-      bool isFree(const Veci<Dim> &pn) {
+      bool isFree(const Veci<Dim> &pn) const {
         if (isOutside(pn))
           return false;
         else
           return isFree(getIndex(pn));
       }
       ///Check if given cell is free by position in map
-      bool isFree(const Vecf<Dim> &pn) { return isFree(floatToInt(pn)); }
+      bool isFree(const Vecf<Dim> &pn) const { return isFree(floatToInt(pn)); }
       ///Check if the given cell is occupied by cell coordinate
-      bool isOccupied(const Veci<Dim> &pn) {
+      bool isOccupied(const Veci<Dim> &pn) const {
         if (isOutside(pn))
           return false;
         else
           return isOccupied(getIndex(pn));
       }
       ///Check if given cell is occupied by position in map
-      bool isOccupied(const Vecf<Dim> &pn) { return isOccupied(floatToInt(pn)); }
+      bool isOccupied(const Vecf<Dim> &pn) const { return isOccupied(floatToInt(pn)); }
       ///Check if the given cell is unknown by cell coordinate
-      bool isUnknown(const Veci<Dim> &pn) {
+      bool isUnknown(const Veci<Dim> &pn) const {
         if (isOutside(pn))
           return false;
         return map_[getIndex(pn)] == val_unknown;
       }
       ///Check if given cell is unknown by position in map
-      bool isUnknown(const Vecf<Dim> &pn) { return isUnknown(floatToInt(pn)); }
+      bool isUnknown(const Vecf<Dim> &pn) const { return isUnknown(floatToInt(pn)); }
 
       /**
        * @brief Set map
@@ -94,7 +94,7 @@ namespace JPS {
       }
 
       ///Print basic information about the util
-      void info() {
+      void info() const {
         Vecf<Dim> range = dim_.template cast<decimal_t>() * res_;
         std::cout << "MapUtil Info ========================== " << std::endl;
         std::cout << "   res: [" << res_ << "]" << std::endl;
@@ -103,10 +103,10 @@ namespace JPS {
         std::cout << "   dim: [" << dim_.transpose() << "]" << std::endl;
       };
 
-      void print() {
+      void print() const {
         std::cout << "MapUtil Print ========================== " << std::endl;
         int width = getDim()(0);
-        for (int i = 0; i < map_.size(); ++i) {
+        for (size_t i = 0; i < map_.size(); ++i) {
           if(i % width == 0)
             std::cout << std::endl;
           const auto &element = map_[i];
@@ -116,20 +116,20 @@ namespace JPS {
       }
 
       ///Float position to discrete cell coordinate
-      Veci<Dim> floatToInt(const Vecf<Dim> &pt) {
+      Veci<Dim> floatToInt(const Vecf<Dim> &pt) const {
         Veci<Dim> pn;
         for(int i = 0; i < Dim; i++)
           pn(i) = std::round((pt(i) - origin_d_(i)) / res_ - 0.5);
         return pn;
       }
       ///Discrete cell coordinate to float position
-      Vecf<Dim> intToFloat(const Veci<Dim> &pn) {
+      Vecf<Dim> intToFloat(const Veci<Dim> &pn) const {
         //return pn.template cast<decimal_t>() * res_ + origin_d_;
         return (pn.template cast<decimal_t>() + Vecf<Dim>::Constant(0.5)) * res_ + origin_d_;
       }
 
       ///Raytrace from float point pt1 to pt2
-      vec_Veci<Dim> rayTrace(const Vecf<Dim> &pt1, const Vecf<Dim> &pt2) {
+      vec_Veci<Dim> rayTrace(const Vecf<Dim> &pt1, const Vecf<Dim> &pt2) const {
         Vecf<Dim> diff = pt2 - pt1;
         decimal_t k = 0.8;
         int max_diff = (diff / res_).template lpNorm<Eigen::Infinity>() / k;
@@ -151,7 +151,7 @@ namespace JPS {
       }
 
       ///Check if the ray from p1 to p2 is occluded
-      bool isBlocked(const Vecf<Dim>& p1, const Vecf<Dim>& p2, int8_t val = 100) {
+      bool isBlocked(const Vecf<Dim>& p1, const Vecf<Dim>& p2, int8_t val = 100) const {
         vec_Veci<Dim> pns = rayTrace(p1, p2);
         for (const auto &pn : pns) {
           if (map_[getIndex(pn)] >= val)
