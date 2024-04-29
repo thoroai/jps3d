@@ -284,7 +284,7 @@ vec_Vecf<Dim> DMPlanner<Dim>::getSearchRegion() {
 }
 
 template <int Dim>
-std::shared_ptr<JPS::MapUtil<Dim>> DMPlanner<Dim>::getMapUtil() const {
+std::shared_ptr<const JPS::MapUtil<Dim>> DMPlanner<Dim>::getMapUtil() const {
   return map_util_;
 }
 
@@ -397,7 +397,9 @@ vec_E<std::pair<Veci<Dim>, int8_t>> DMPlanner<Dim>::createMask(int pow) {
 }
 
 template <int Dim>
-void DMPlanner<Dim>::setMap(const std::shared_ptr<JPS::MapUtil<Dim>> &map_util,
+// void DMPlanner<Dim>::setMap(const std::shared_ptr<JPS::MapUtil<Dim>> &map_util,
+// void DMPlanner<Dim>::setMap(const std::shared_ptr<const JPS::MapUtil<Dim>> &map_util,
+void DMPlanner<Dim>::setMap(std::shared_ptr<const JPS::MapUtil<Dim>> &map_util,
                             const Vecf<Dim> &pos) {
   map_util_ = std::make_shared<JPS::MapUtil<Dim>>(*map_util);
   const auto mask = createMask(pow_);
