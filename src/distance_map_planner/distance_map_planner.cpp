@@ -626,7 +626,7 @@ bool IterativeDMPlanner<Dim>::iterativeComputePath(
 
 template class IterativeDMPlanner<2>;
 
-template class IterativeDMPlanner<3>;
+// template class IterativeDMPlanner<3>;
 
 
 
