@@ -84,7 +84,9 @@ public:
    * it copies the map object, thus change the original map_uitl won't affect
    * the internal map.
    */
-  void setMap(std::shared_ptr<const JPS::MapUtil<Dim>> map_util, // Can not be a const shared_ptr<> because unlike the setMapUtil() in jps_planner.h, here, a new shared_ptr is created within the setter function setMap(). Why is this setting behavior different here? Check if it matters.
+   // NOTE: map_util can not be a "const shared_ptr<>" here unlike in setMapUtil() of jps_planner.h, because this implementation of setMap() creates a new shared_ptr. 
+   // Why is this setting behavior different here compared to jps_planner.h? Check if it matters.
+  void setMap(std::shared_ptr<const JPS::MapUtil<Dim>> map_util,
               const Vecf<Dim>& pos);
 
   /// Compute the optimal path
