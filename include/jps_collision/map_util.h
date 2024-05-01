@@ -27,10 +27,14 @@ namespace JPS {
       Veci<Dim> getDim() const { return dim_; }
       ///Get origin
       Vecf<Dim> getOrigin() const { return origin_d_; }
-      ///Get index of a cell
+      ///Get 1D index of a cell from 2D/3D grid index
       int getIndex(const Veci<Dim>& pn) const {
           return Dim == 2 ? pn(0) + dim_(0) * pn(1) :
                             pn(0) + dim_(0) * pn(1) + dim_(0) * dim_(1) * pn(2);
+      }
+      ///Get 1D index of a cell from 2D/3D location on map
+      int getIndex(const Vecf<Dim>& pn) const {
+          return getIndex(floatToInt(pn));
       }
 
       ///Check if the given cell is outside of the map in i-the dimension

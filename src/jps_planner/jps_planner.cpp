@@ -8,7 +8,6 @@ JPSPlanner<Dim>::JPSPlanner(bool verbose): planner_verbose_(verbose) {
 }
 
 template <int Dim>
-// void JPSPlanner<Dim>::setMapUtil(const std::shared_ptr<JPS::MapUtil<Dim>> &map_util) {
 void JPSPlanner<Dim>::setMapUtil(const std::shared_ptr<const JPS::MapUtil<Dim>> &map_util) {
   map_util_ = map_util;
 }
@@ -165,31 +164,10 @@ void JPSPlanner<Dim>::updateMap() {
         for( int x = 0; x < dim(0); ++x)
           cmap_[x+y*dim(0)] = map_util_->isOccupied(Veci<Dim>(x,y)) ? 1:0;
   }
-
-
-  std::cout << "updateMap()" << std::endl;
-  bool all_clear = true;
-  for (char elem : cmap_)
-  {
-    if(static_cast<int>(elem) > 0)
-    {
-      all_clear = false;
-    }
-  }
-  std::cout << "update: " << all_clear << std::endl;
-
-
-
-
 }
 
 template <int Dim>
 bool JPSPlanner<Dim>::plan(const Vecf<Dim> &start, const Vecf<Dim> &goal, decimal_t eps, bool use_jps) {
-
-  std::cout << "DEBUG" << std::endl;
-  std::cout << "occ: " << map_util_->isOccupied(Vecf<Dim> {-6.115, 6.194}) << std::endl;
-
-
   if(planner_verbose_){
     std::cout <<"Start: " << start.transpose() << std::endl;
     std::cout <<"Goal:  " << goal.transpose() << std::endl;
@@ -281,5 +259,5 @@ bool JPSPlanner<Dim>::plan(const Vecf<Dim> &start, const Vecf<Dim> &goal, decima
 
 template class JPSPlanner<2>;
 
-// template class JPSPlanner<3>;
+template class JPSPlanner<3>;
 

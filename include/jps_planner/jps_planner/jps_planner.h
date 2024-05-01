@@ -24,7 +24,6 @@ class JPSPlanner
     JPSPlanner(bool verbose = false);
 
     ///Set map util for collistion checking
-    // void setMapUtil(const std::shared_ptr<JPS::MapUtil<Dim>>& map_util);
     void setMapUtil(const std::shared_ptr<const JPS::MapUtil<Dim>>& map_util);
     /**
      * @brief Status of the planner
