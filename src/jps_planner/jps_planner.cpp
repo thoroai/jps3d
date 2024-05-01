@@ -8,7 +8,7 @@ JPSPlanner<Dim>::JPSPlanner(bool verbose): planner_verbose_(verbose) {
 }
 
 template <int Dim>
-void JPSPlanner<Dim>::setMapUtil(const std::shared_ptr<JPS::MapUtil<Dim>> &map_util) {
+void JPSPlanner<Dim>::setMapUtil(const std::shared_ptr<const JPS::MapUtil<Dim>> &map_util) {
   map_util_ = map_util;
 }
 
@@ -22,7 +22,7 @@ template <int Dim>
 vec_Vecf<Dim> JPSPlanner<Dim>::getRawPath() const { return raw_path_; }
 
 template <int Dim>
-std::shared_ptr<JPS::MapUtil<Dim>> JPSPlanner<Dim>::getMapUtil() const { return map_util_; }
+std::shared_ptr<const JPS::MapUtil<Dim>> JPSPlanner<Dim>::getMapUtil() const { return map_util_; }
 
 template <int Dim>
 std::vector<char> JPSPlanner<Dim>::getOccupancyMapUtil1D() const { return cmap_; }

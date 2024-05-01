@@ -72,7 +72,7 @@ public:
   /// Get the searching region
   vec_Vecf<Dim> getSearchRegion();
   /// Get the internal map util
-  std::shared_ptr<JPS::MapUtil<Dim>> getMapUtil() const;
+  std::shared_ptr<const JPS::MapUtil<Dim>> getMapUtil() const;
   /// Get the internal 1D distance map field vector
   std::vector<int8_t> getDistanceFieldMap() const;
 
@@ -84,7 +84,9 @@ public:
    * it copies the map object, thus change the original map_uitl won't affect
    * the internal map.
    */
-  void setMap(const std::shared_ptr<JPS::MapUtil<Dim>> &map_util,
+   // NOTE: map_util can not be a "const shared_ptr<>" here unlike in setMapUtil() of jps_planner.h, because this implementation of setMap() creates a new shared_ptr. 
+   // Why is this setting behavior different here compared to jps_planner.h? Check if it matters.
+  void setMap(std::shared_ptr<const JPS::MapUtil<Dim>> map_util,
               const Vecf<Dim>& pos);
 
   /// Compute the optimal path
